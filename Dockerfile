@@ -25,17 +25,14 @@ RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
-# Instala modulos con npm
-RUN npm install --global \
-    pyright
 
 # Instala paquetes de R
 RUN Rscript -e "install.packages('languageserver', repos='http://cran.rstudio.com')"
 
 # Install Neovim
-RUN wget --directory-prefix="/root" https://github.com/neovim/neovim/releases/download/stable/nvim.appimage && \
-    chmod u+x /root/nvim.appimage && \
-    cd /root && /root/nvim.appimage --appimage-extract && \
+RUN wget --directory-prefix="/root" https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-linux-x86_64.appimage && \
+    chmod u+x /root/nvim-linux-x86_64.appimage && \
+    cd /root && /root/nvim-linux-x86_64.appimage --appimage-extract && \
     ln -s /root/squashfs-root/AppRun /usr/bin/nvim
 
 # Setup Neovim kickstart configuration
