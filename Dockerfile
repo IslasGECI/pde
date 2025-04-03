@@ -8,7 +8,7 @@ RUN apt update && apt full-upgrade --yes && apt install --yes \
     ripgrep \
     universal-ctags \
     wget \
-        && \
+    && \
     apt clean
 
 # Instala modulos con pip
@@ -16,9 +16,9 @@ RUN pip install --upgrade pip && pip install \
     rope
 
 # Install Node
-ENV NODE_VERSION=18.16.1
+ENV NODE_VERSION=22
 RUN apt install -y curl
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
 ENV NVM_DIR=/root/.nvm
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
