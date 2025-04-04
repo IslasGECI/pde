@@ -15,8 +15,8 @@ test_docker_installed_versions:
 	apt-cache policy ripgrep | grep "Installed: 13"
 	apt-cache policy universal-ctags | grep "Installed: 5"
 	apt-cache policy wget | grep "Installed: 1"
-	node --version | grep "v22"
-	npm --version | grep "^10"
+	\. "${HOME}/.nvm/nvm.sh" && node --version | grep "v22"
+	\. "${HOME}/.nvm/nvm.sh" && npm --version | grep "^10"
 	nvim --version | grep "NVIM v0.11"
 	pip freeze | grep rope==1
 
