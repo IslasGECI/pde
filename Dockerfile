@@ -43,6 +43,5 @@ RUN mkdir --parents /root/.config && \
 RUN git clone https://github.com/github/copilot.vim.git /root/.config/nvim/pack/github/start/copilot.vim
 
 # Instala copilot.vim
-RUN sed -i "s/'tpope\/vim-sleuth',/'tpope\/vim-sleuth','github\/copilot.vim',/" /root/.config/nvim/init.lua
-
+RUN sed -i "s/require('lazy').setup({/require('lazy').setup({\n\t'github\/copilot.vim',/" /root/.config/nvim/init.lua
 COPY dotfiles/. /root/
