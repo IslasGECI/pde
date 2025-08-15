@@ -1,6 +1,6 @@
 FROM islasgeci/base:latest
 
-# Instala paquetes en el sistema operativo
+# Instala paquetes en el sistema operativosed -i "s/'tpope\/vim-sleuth',/'tpope\/vim-sleuth','github\/copilot.vim'/" /root/.config/nvim/init.lua
 RUN apt update && apt full-upgrade --yes && apt install --yes \
     fd-find \
     pip \
@@ -38,7 +38,8 @@ RUN wget --directory-prefix="/root" https://github.com/neovim/neovim/releases/do
 # Setup Neovim kickstart configuration
 RUN mkdir --parents /root/.config && \
     git clone https://github.com/nvim-lua/kickstart.nvim.git /root/.config/nvim && \
-    echo 'require("vimrc")' >> /root/.config/nvim/init.lua
+    echo 'require("vimrc")' >> /root/.config/nvim/init.lua \
+    sed -i "s/'tpope\/vim-sleuth',/'tpope\/vim-sleuth','github\/copilot.vim'/," /root/.config/nvim/init.lua
 
 # Download Copilot plugin
 RUN git clone https://github.com/github/copilot.vim.git /root/.config/nvim/pack/github/start/copilot.vim
