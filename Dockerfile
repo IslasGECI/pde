@@ -38,8 +38,10 @@ RUN wget --directory-prefix="/root" https://github.com/neovim/neovim/releases/do
 # Setup Neovim kickstart configuration
 RUN mkdir --parents /root/.config && \
     git clone https://github.com/nvim-lua/kickstart.nvim.git /root/.config/nvim && \
-    echo 'require("vimrc")' >> /root/.config/nvim/init.lua \
-    sed -i "s/'tpope\/vim-sleuth',/'tpope\/vim-sleuth','github\/copilot.vim'/," /root/.config/nvim/init.lua
+    echo 'require("vimrc")' >> /root/.config/nvim/init.lua
+
+# Instala copilot.vim
+RUN sed -i "s/'tpope\/vim-sleuth',/'tpope\/vim-sleuth','github\/copilot.vim'/," /root/.config/nvim/init.lua
 
 # Download Copilot plugin
 RUN git clone https://github.com/github/copilot.vim.git /root/.config/nvim/pack/github/start/copilot.vim
