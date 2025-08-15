@@ -1,19 +1,18 @@
 FROM islasgeci/base:latest
 
-# Instala paquetes en el sistema operativosed -i "s/'tpope\/vim-sleuth',/'tpope\/vim-sleuth','github\/copilot.vim'/" /root/.config/nvim/init.lua
 RUN apt update && apt full-upgrade --yes && apt install --yes \
-    fd-find \
-    pip \
-    python3-venv \
-    ripgrep \
-    universal-ctags \
-    wget \
-    && \
-    apt clean
+	fd-find \
+	pip \
+	python3-venv \
+	ripgrep \
+	universal-ctags \
+	wget \
+	&& \
+	apt clean
 
 # Instala modulos con pip
 RUN pip install --upgrade pip && pip install \
-    rope
+	rope
 
 # Install Node
 ENV NODE_VERSION=22
@@ -31,19 +30,19 @@ RUN Rscript -e "install.packages('languageserver', repos='http://cran.rstudio.co
 
 # Install Neovim
 RUN wget --directory-prefix="/root" https://github.com/neovim/neovim/releases/download/v0.11.0/nvim-linux-x86_64.appimage && \
-    chmod u+x /root/nvim-linux-x86_64.appimage && \
-    cd /root && /root/nvim-linux-x86_64.appimage --appimage-extract && \
-    ln -s /root/squashfs-root/AppRun /usr/bin/nvim
+	chmod u+x /root/nvim-linux-x86_64.appimage && \
+	cd /root && /root/nvim-linux-x86_64.appimage --appimage-extract && \
+	ln -s /root/squashfs-root/AppRun /usr/bin/nvim
 
 # Setup Neovim kickstart configuration
 RUN mkdir --parents /root/.config && \
-    git clone https://github.com/nvim-lua/kickstart.nvim.git /root/.config/nvim && \
-    echo 'require("vimrc")' >> /root/.config/nvim/init.lua
+	git clone https://github.com/nvim-lua/kickstart.nvim.git /root/.config/nvim && \
+	echo 'require("vimrc")' >> /root/.config/nvim/init.lua
 
 # Download Copilot plugin
 RUN git clone https://github.com/github/copilot.vim.git /root/.config/nvim/pack/github/start/copilot.vim
 
 # Instala copilot.vim
-RUN sed -i "s/'tpope\/vim-sleuth',/'tpope\/vim-sleuth','github\/copilot.vim'/," /root/.config/nvim/init.lua
+RUN sed -i "s/'tpope\/vim-sleuth',/'tpope\/vim-sleuth','github\/copilot.vim',/" /root/.config/nvim/init.lua
 
 COPY dotfiles/. /root/
