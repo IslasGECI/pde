@@ -44,4 +44,14 @@ RUN git clone https://github.com/github/copilot.vim.git /root/.config/nvim/pack/
 
 # Instala copilot.vim
 RUN sed -i "s/require('lazy').setup({/require('lazy').setup({\n\t'github\/copilot.vim',/" /root/.config/nvim/init.lua
+
+# Instala opencode
+RUN apt install -y lsof
+RUN curl -fsSL https://opencode.ai/install | bash
+RUN export PATH=$PATH:$HOME/.opencode/bin
+# Instala opencode.nvim
+COPY opencode.lua /root/.config/nvim/init.lua/lua/custom/plugins/ 
+# Instala custom plugins
+RUN sed -i "s/-- { import = 'custom.plugins' }/{ import = 'custom.plugins' }/" /root/.config/nvim/init.lua
+
 COPY dotfiles/. /root/
