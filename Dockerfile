@@ -50,7 +50,7 @@ RUN apt install -y lsof
 RUN curl -fsSL https://opencode.ai/install | bash
 RUN export PATH=$PATH:$HOME/.opencode/bin
 # Instala opencode.nvim
-COPY opencode.lua /root/.config/nvim/init.lua/lua/custom/plugins/ 
+COPY opencode.lua /root/.config/nvim/lua/custom/plugins/ 
 # Instala custom plugins
 RUN sed -i "s/-- { import = 'custom.plugins' }/{ import = 'custom.plugins' }/" /root/.config/nvim/init.lua
 
