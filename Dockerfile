@@ -51,6 +51,6 @@ RUN export PATH=$PATH:$HOME/.opencode/bin
 # Instala opencode.nvim
 COPY opencode.lua /root/.config/nvim/lua/custom/plugins/
 # Instala custom plugins
-RUN sed -i "s/-- { import = 'custom.plugins' }/{ import = 'custom.plugins' }/" /root/.config/nvim/init.lua
+RUN sed -i "s/-- require 'custom.plugins' }/{ require 'custom.plugins' }/" /root/.config/nvim/init.lua
 
 COPY dotfiles/. /root/
